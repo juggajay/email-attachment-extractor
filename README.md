@@ -1,36 +1,152 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Email Attachment Extractor
+
+A clean, professional web application that helps users extract and organize email attachments using AI-powered suggestions. Built with Next.js, TypeScript, Supabase, and OpenAI.
+
+## Features
+
+- **IMAP Email Connection**: Connect to any email provider using IMAP credentials
+- **Smart Attachment Detection**: Automatically lists emails with attachments
+- **AI-Powered Organization**: Get intelligent suggestions for file names and folder structures
+- **One-Click Extraction**: Extract single or multiple attachments with ease
+- **Learning System**: The AI learns from your corrections to improve future suggestions
+- **Secure Session Management**: Passwords are never stored, only kept in encrypted sessions
+- **Clean Interface**: Minimal, professional design that feels like an extension of your email client
+
+## Tech Stack
+
+- **Frontend**: Next.js 14 with TypeScript and Tailwind CSS
+- **Database**: Supabase (PostgreSQL)
+- **Email**: IMAP protocol support for all major providers
+- **AI**: OpenAI GPT-4 for intelligent file organization
+- **File Handling**: Browser-based downloads with ZIP support
+- **Authentication**: Session-based with iron-session
+- **Deployment**: Optimized for Vercel
 
 ## Getting Started
 
-First, run the development server:
+### Prerequisites
 
+1. Node.js 18+ and npm
+2. Supabase account
+3. OpenAI API key
+4. Email account with IMAP access enabled
+
+### Installation
+
+1. Clone the repository:
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+git clone [repository-url]
+cd email-attachment-extractor
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+2. Install dependencies:
+```bash
+npm install
+```
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+3. Set up environment variables:
+```bash
+cp .env.local.example .env.local
+```
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+Edit `.env.local` with your credentials:
+```
+NEXT_PUBLIC_SUPABASE_URL=your_supabase_url
+NEXT_PUBLIC_SUPABASE_ANON_KEY=your_supabase_anon_key
+OPENAI_API_KEY=your_openai_api_key
+SESSION_PASSWORD=your_32_character_session_password
+```
 
-## Learn More
+4. Set up Supabase database:
+- Create a new Supabase project
+- Run the SQL schema from `supabase/schema.sql`
+- Enable Row Level Security (RLS) as configured in the schema
 
-To learn more about Next.js, take a look at the following resources:
+5. Run the development server:
+```bash
+npm run dev
+```
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+Open [http://localhost:3000](http://localhost:3000) in your browser.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+## Usage
 
-## Deploy on Vercel
+1. **Connect Your Email**:
+   - Enter your email credentials
+   - Select your provider or enter custom IMAP settings
+   - For Gmail, use an app-specific password
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+2. **Browse Emails**:
+   - View all emails with attachments
+   - Green checkmarks indicate processed emails
+   - Click any email to view details
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+3. **Extract Attachments**:
+   - Click "Extract Files" on any email
+   - Review AI suggestions for file names and locations
+   - Edit suggestions if needed
+   - Click "Confirm & Download"
+
+4. **Download Options**:
+   - Single files download directly
+   - Multiple files download as a ZIP with folder structure
+
+## IMAP Settings
+
+Common IMAP configurations:
+
+| Provider | Host | Port | Security |
+|----------|------|------|----------|
+| Gmail | imap.gmail.com | 993 | SSL |
+| Outlook | outlook.office365.com | 993 | SSL |
+| Yahoo | imap.mail.yahoo.com | 993 | SSL |
+| iCloud | imap.mail.me.com | 993 | SSL |
+
+## Security
+
+- Passwords are never stored in the database
+- All credentials are encrypted in session storage
+- Row-level security ensures users only see their own data
+- Rate limiting prevents API abuse
+- HTTPS required in production
+
+## Deployment
+
+### Vercel Deployment
+
+1. Push to GitHub
+2. Import project in Vercel
+3. Add environment variables in Vercel dashboard
+4. Deploy
+
+The `vercel.json` file is pre-configured with optimal settings.
+
+## API Endpoints
+
+- `POST /api/imap/connect` - Test and save IMAP connection
+- `GET /api/imap/list` - List emails with attachments
+- `GET /api/imap/fetch/[uid]` - Get email details and attachments
+- `POST /api/extract/suggest` - Generate AI suggestions
+- `POST /api/extract/download` - Download prepared files
+
+## Database Schema
+
+Key tables:
+- `users` - User accounts
+- `email_accounts` - Connected email accounts
+- `processed_emails` - Track extracted emails
+- `extracted_files` - File metadata
+- `filing_patterns` - AI learning patterns
+- `user_corrections` - Track user edits
+
+## Contributing
+
+1. Fork the repository
+2. Create a feature branch
+3. Commit your changes
+4. Push to the branch
+5. Open a pull request
+
+## License
+
+MIT License - see LICENSE file for details
