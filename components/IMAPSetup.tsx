@@ -73,12 +73,22 @@ export default function IMAPSetup() {
 
   return (
     <div className="min-h-screen flex items-center justify-center bg-background p-4">
-      <div className="w-full max-w-md">
-        <div className="bg-background border border-border rounded-lg p-8 shadow-sm">
-          <h1 className="text-2xl font-semibold mb-2">Connect Your Email</h1>
-          <p className="text-muted-foreground mb-6">
-            Enter your email credentials to start extracting attachments
-          </p>
+      <div className="absolute inset-0 bg-gradient-to-br from-primary/5 via-transparent to-accent/5" />
+      <div className="w-full max-w-md relative">
+        <div className="bg-card border border-border rounded-2xl p-8 card-shadow-lg transition-all-300 hover:card-shadow-xl">
+          <div className="text-center mb-8">
+            <div className="inline-flex items-center justify-center w-16 h-16 rounded-full bg-primary/10 mb-4">
+              <svg className="w-8 h-8 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+              </svg>
+            </div>
+            <h1 className="text-3xl font-bold mb-2 bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent">
+              Email Attachment Extractor
+            </h1>
+            <p className="text-muted-foreground">
+              Connect your email to start organizing attachments with AI
+            </p>
+          </div>
 
           {error && (
             <div className="mb-4 p-3 bg-destructive/10 border border-destructive/20 rounded-md text-destructive text-sm">
@@ -98,9 +108,10 @@ export default function IMAPSetup() {
                 value={formData.email}
                 onChange={(e) => setFormData({ ...formData, email: e.target.value })}
                 className={cn(
-                  "w-full px-3 py-2 border border-border rounded-md",
-                  "bg-input text-foreground",
-                  "focus:outline-none focus:ring-2 focus:ring-ring focus:border-transparent"
+                  "w-full px-4 py-3 border border-border rounded-lg",
+                  "bg-input text-foreground transition-all-300",
+                  "focus:outline-none focus:ring-2 focus:ring-ring focus:border-transparent",
+                  "hover:border-primary/50"
                 )}
                 placeholder="you@example.com"
               />
@@ -117,9 +128,10 @@ export default function IMAPSetup() {
                 value={formData.password}
                 onChange={(e) => setFormData({ ...formData, password: e.target.value })}
                 className={cn(
-                  "w-full px-3 py-2 border border-border rounded-md",
-                  "bg-input text-foreground",
-                  "focus:outline-none focus:ring-2 focus:ring-ring focus:border-transparent"
+                  "w-full px-4 py-3 border border-border rounded-lg",
+                  "bg-input text-foreground transition-all-300",
+                  "focus:outline-none focus:ring-2 focus:ring-ring focus:border-transparent",
+                  "hover:border-primary/50"
                 )}
                 placeholder="••••••••"
               />
@@ -137,9 +149,10 @@ export default function IMAPSetup() {
                 value={formData.provider}
                 onChange={(e) => setFormData({ ...formData, provider: e.target.value })}
                 className={cn(
-                  "w-full px-3 py-2 border border-border rounded-md",
-                  "bg-input text-foreground",
-                  "focus:outline-none focus:ring-2 focus:ring-ring focus:border-transparent"
+                  "w-full px-4 py-3 border border-border rounded-lg",
+                  "bg-input text-foreground transition-all-300",
+                  "focus:outline-none focus:ring-2 focus:ring-ring focus:border-transparent",
+                  "hover:border-primary/50"
                 )}
               >
                 {commonProviders.map(provider => (
@@ -183,9 +196,10 @@ export default function IMAPSetup() {
                       value={formData.port}
                       onChange={(e) => setFormData({ ...formData, port: e.target.value })}
                       className={cn(
-                        "w-full px-3 py-2 border border-border rounded-md",
-                        "bg-input text-foreground",
-                        "focus:outline-none focus:ring-2 focus:ring-ring focus:border-transparent"
+                        "w-full px-4 py-3 border border-border rounded-lg",
+                        "bg-input text-foreground transition-all-300",
+                        "focus:outline-none focus:ring-2 focus:ring-ring focus:border-transparent",
+                        "hover:border-primary/50"
                       )}
                       placeholder="993"
                     />
@@ -200,9 +214,10 @@ export default function IMAPSetup() {
                       value={formData.security}
                       onChange={(e) => setFormData({ ...formData, security: e.target.value })}
                       className={cn(
-                        "w-full px-3 py-2 border border-border rounded-md",
-                        "bg-input text-foreground",
-                        "focus:outline-none focus:ring-2 focus:ring-ring focus:border-transparent"
+                        "w-full px-4 py-3 border border-border rounded-lg",
+                        "bg-input text-foreground transition-all-300",
+                        "focus:outline-none focus:ring-2 focus:ring-ring focus:border-transparent",
+                        "hover:border-primary/50"
                       )}
                     >
                       <option value="SSL">SSL</option>
@@ -217,13 +232,22 @@ export default function IMAPSetup() {
               type="submit"
               disabled={loading}
               className={cn(
-                "w-full py-2 px-4 rounded-md font-medium transition-colors",
-                "bg-primary text-primary-foreground hover:bg-primary/90",
-                "disabled:opacity-50 disabled:cursor-not-allowed",
-                "focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2"
+                "w-full py-3 px-4 rounded-lg font-semibold transition-all-300",
+                "gradient-bg text-white hover:opacity-90 transform hover:scale-[1.02]",
+                "disabled:opacity-50 disabled:cursor-not-allowed disabled:transform-none",
+                "focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2",
+                "card-shadow-md hover:card-shadow-lg"
               )}
             >
-              {loading ? 'Connecting...' : 'Connect'}
+              {loading ? (
+                <span className="flex items-center justify-center gap-2">
+                  <svg className="animate-spin h-5 w-5" viewBox="0 0 24 24">
+                    <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4" fill="none" />
+                    <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z" />
+                  </svg>
+                  Connecting...
+                </span>
+              ) : 'Connect to Email'}
             </button>
           </form>
 
