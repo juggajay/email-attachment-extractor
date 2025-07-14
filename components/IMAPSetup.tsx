@@ -150,13 +150,14 @@ export default function IMAPSetup() {
                 onChange={(e) => setFormData({ ...formData, provider: e.target.value })}
                 className={cn(
                   "w-full px-4 py-3 border border-border rounded-lg",
-                  "bg-input text-foreground transition-all-300",
+                  "bg-card text-foreground transition-all-300", // Changed from bg-input to bg-card
                   "focus:outline-none focus:ring-2 focus:ring-ring focus:border-transparent",
-                  "hover:border-primary/50"
+                  "hover:border-primary/50",
+                  "cursor-pointer"
                 )}
               >
                 {commonProviders.map(provider => (
-                  <option key={provider.provider} value={provider.provider}>
+                  <option key={provider.provider} value={provider.provider} className="bg-card text-foreground">
                     {provider.provider}
                   </option>
                 ))}
@@ -215,13 +216,14 @@ export default function IMAPSetup() {
                       onChange={(e) => setFormData({ ...formData, security: e.target.value })}
                       className={cn(
                         "w-full px-4 py-3 border border-border rounded-lg",
-                        "bg-input text-foreground transition-all-300",
+                        "bg-card text-foreground transition-all-300", // Changed from bg-input to bg-card
                         "focus:outline-none focus:ring-2 focus:ring-ring focus:border-transparent",
-                        "hover:border-primary/50"
+                        "hover:border-primary/50",
+                        "cursor-pointer"
                       )}
                     >
-                      <option value="SSL">SSL</option>
-                      <option value="TLS">TLS</option>
+                      <option value="SSL" className="bg-card text-foreground">SSL</option>
+                      <option value="TLS" className="bg-card text-foreground">TLS</option>
                     </select>
                   </div>
                 </div>
