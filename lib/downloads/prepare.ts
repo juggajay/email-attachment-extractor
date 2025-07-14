@@ -1,5 +1,4 @@
 import archiver from 'archiver'
-import { Readable } from 'stream'
 
 interface FileToDownload {
   originalFilename: string

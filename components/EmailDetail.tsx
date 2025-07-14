@@ -27,6 +27,7 @@ export default function EmailDetail({ uid }: EmailDetailProps) {
 
   useEffect(() => {
     fetchEmailDetails()
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [uid])
 
   const fetchEmailDetails = async () => {

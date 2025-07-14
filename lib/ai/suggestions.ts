@@ -46,9 +46,9 @@ export async function generateFileSuggestions(
   }
 
   // Extract sender domain and company name
-  const senderEmail = email.from.match(/<(.+?)>/)?.[1] || email.from
-  const senderDomain = senderEmail.split('@')[1] || ''
-  const senderName = email.from.split('<')[0].trim()
+  // const senderEmail = email.from.match(/<(.+?)>/)?.[1] || email.from
+  // const senderDomain = senderEmail.split('@')[1] || ''
+  // const senderName = email.from.split('<')[0].trim()
 
   // Create the prompt for OpenAI
   const systemPrompt = `You are an intelligent file organization assistant. Your task is to suggest organized file names and folder structures for email attachments.

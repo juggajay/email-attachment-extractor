@@ -1,11 +1,11 @@
-import { NextRequest, NextResponse } from 'next/server'
+import { NextResponse } from 'next/server'
 import { IMAPClient } from '@/lib/imap/client'
 import { getIronSession } from 'iron-session'
 import { cookies } from 'next/headers'
 import { supabase } from '@/lib/supabase/client'
 import { SessionData, sessionOptions } from '@/lib/session'
 
-export async function GET(request: NextRequest) {
+export async function GET() {
   try {
     const session = await getIronSession<SessionData>(await cookies(), sessionOptions)
 

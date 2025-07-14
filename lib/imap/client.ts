@@ -1,5 +1,7 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import Imap from 'imap'
-import { simpleParser, ParsedMail, Attachment } from 'mailparser'
+import { simpleParser, ParsedMail } from 'mailparser'
 import { IMAPConfig, EmailMessage, EmailAttachment } from './types'
 
 export class IMAPClient {
@@ -50,7 +52,7 @@ export class IMAPClient {
       await this.connect()
       await this.disconnect()
       return true
-    } catch (error) {
+    } catch (_error) {
       return false
     }
   }
@@ -63,7 +65,7 @@ export class IMAPClient {
     return new Promise((resolve, reject) => {
       const emails: EmailMessage[] = []
 
-      this.connection!.openBox('INBOX', true, (err, box) => {
+      this.connection!.openBox('INBOX', true, (err, _box) => {
         if (err) {
           reject(err)
           return
@@ -89,11 +91,11 @@ export class IMAPClient {
             struct: true
           })
 
-          fetch.on('message', (msg, seqno) => {
+          fetch.on('message', (msg, _seqno) => {
             let buffer = ''
             let attributes: any = {}
 
-            msg.on('body', (stream, info) => {
+            msg.on('body', (stream, _info) => {
               stream.on('data', (chunk) => {
                 buffer += chunk.toString('utf8')
               })
@@ -123,8 +125,8 @@ export class IMAPClient {
                     attachments: this.extractAttachmentInfo(parsed)
                   })
                 }
-              } catch (error) {
-                console.error('Error parsing email:', error)
+              } catch (_error) {
+                console.error('Error parsing email:', _error)
               }
             })
           })
@@ -147,7 +149,7 @@ export class IMAPClient {
     }
 
     return new Promise((resolve, reject) => {
-      this.connection!.openBox('INBOX', true, (err, box) => {
+      this.connection!.openBox('INBOX', true, (err, _box) => {
         if (err) {
           reject(err)
           return
@@ -188,8 +190,8 @@ export class IMAPClient {
                 attachments: this.extractAttachmentInfo(parsed),
                 body: parsed.text || parsed.html || ''
               }
-            } catch (error) {
-              console.error('Error parsing email details:', error)
+            } catch (_error) {
+              console.error('Error parsing email details:', _error)
             }
           })
         })
@@ -211,7 +213,7 @@ export class IMAPClient {
     }
 
     return new Promise((resolve, reject) => {
-      this.connection!.openBox('INBOX', true, (err, box) => {
+      this.connection!.openBox('INBOX', true, (err, _box) => {
         if (err) {
           reject(err)
           return
@@ -245,8 +247,8 @@ export class IMAPClient {
                     })
                   }
                 }
-              } catch (error) {
-                console.error('Error downloading attachments:', error)
+              } catch (_error) {
+                console.error('Error downloading attachments:', _error)
               }
             })
           })
@@ -263,14 +265,17 @@ export class IMAPClient {
     })
   }
 
-  private hasAttachments(struct: any[]): boolean {
+  private hasAttachments(struct: unknown[]): boolean {
     if (!struct) return false
 
     for (const part of struct) {
       if (Array.isArray(part)) {
         if (this.hasAttachments(part)) return true
-      } else if (part.disposition && part.disposition.type === 'attachment') {
-        return true
+      } else if (part && typeof part === 'object' && 'disposition' in part) {
+        const disposition = part.disposition as { type?: string }
+        if (disposition?.type === 'attachment') {
+          return true
+        }
       }
     }
     return false

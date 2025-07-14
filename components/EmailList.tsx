@@ -13,6 +13,7 @@ export default function EmailList() {
 
   useEffect(() => {
     fetchEmails()
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
   const fetchEmails = async () => {
