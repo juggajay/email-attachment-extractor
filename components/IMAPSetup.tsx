@@ -74,8 +74,100 @@ export default function IMAPSetup() {
   return (
     <div className="min-h-screen flex items-center justify-center bg-background p-4">
       <div className="absolute inset-0 bg-gradient-to-br from-primary/5 via-transparent to-accent/5" />
-      <div className="w-full max-w-md relative">
-        <div className="bg-card border border-border rounded-2xl p-8 card-shadow-lg transition-all-300 hover:card-shadow-xl">
+      <div className="w-full max-w-6xl mx-auto relative flex flex-col lg:flex-row gap-8 items-start justify-center">
+        {/* How It Works Section - Hidden on mobile, shown on desktop */}
+        <div className="hidden lg:block flex-1 lg:order-2 max-w-xl">
+          <div className="bg-card/50 backdrop-blur border border-border rounded-2xl p-6 lg:p-8">
+            <h2 className="text-2xl font-bold mb-6">How It Works</h2>
+            
+            <div className="space-y-6">
+              <div className="flex gap-4">
+                <div className="flex-shrink-0 w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center text-primary font-semibold">
+                  1
+                </div>
+                <div>
+                  <h3 className="font-semibold mb-1">Connect Your Email</h3>
+                  <p className="text-sm text-muted-foreground">
+                    Securely connect using IMAP. Your password stays in your browser - never stored.
+                  </p>
+                </div>
+              </div>
+
+              <div className="flex gap-4">
+                <div className="flex-shrink-0 w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center text-primary font-semibold">
+                  2
+                </div>
+                <div>
+                  <h3 className="font-semibold mb-1">Find Attachments</h3>
+                  <p className="text-sm text-muted-foreground">
+                    Instantly see all emails with attachments. Green checks show processed emails.
+                  </p>
+                </div>
+              </div>
+
+              <div className="flex gap-4">
+                <div className="flex-shrink-0 w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center text-primary font-semibold">
+                  3
+                </div>
+                <div>
+                  <h3 className="font-semibold mb-1">AI Organization</h3>
+                  <p className="text-sm text-muted-foreground">
+                    Click "Extract Files" and AI suggests smart names & folders based on email content.
+                  </p>
+                  <div className="mt-2 p-3 bg-muted rounded-lg">
+                    <p className="text-xs font-mono">invoice.pdf → Invoice_12345_ABCCorp_Jan2025.pdf</p>
+                    <p className="text-xs font-mono mt-1">📁 /Vendors/ABC Corp/Invoices/2025/</p>
+                  </div>
+                </div>
+              </div>
+
+              <div className="flex gap-4">
+                <div className="flex-shrink-0 w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center text-primary font-semibold">
+                  4
+                </div>
+                <div>
+                  <h3 className="font-semibold mb-1">Review & Download</h3>
+                  <p className="text-sm text-muted-foreground">
+                    Edit suggestions if needed, then download. Multiple files save as organized ZIP.
+                  </p>
+                </div>
+              </div>
+
+              <div className="flex gap-4">
+                <div className="flex-shrink-0 w-10 h-10 rounded-full bg-accent/10 flex items-center justify-center text-accent font-semibold">
+                  <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 10V3L4 14h7v7l9-11h-7z" />
+                  </svg>
+                </div>
+                <div>
+                  <h3 className="font-semibold mb-1">It Learns!</h3>
+                  <p className="text-sm text-muted-foreground">
+                    The AI remembers your edits and improves suggestions for similar future emails.
+                  </p>
+                </div>
+              </div>
+            </div>
+
+            <div className="mt-8 p-4 bg-primary/5 rounded-lg border border-primary/20">
+              <h4 className="font-semibold text-sm mb-2 flex items-center gap-2">
+                <svg className="w-4 h-4 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
+                </svg>
+                Privacy First
+              </h4>
+              <ul className="text-xs text-muted-foreground space-y-1">
+                <li>• No email content stored</li>
+                <li>• Password never saved to database</li>
+                <li>• Direct connection to your email</li>
+                <li>• Downloads happen in your browser</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        {/* Login Form */}
+        <div className="w-full max-w-md lg:w-[450px] lg:order-1">
+          <div className="bg-card border border-border rounded-2xl p-8 card-shadow-lg transition-all-300 hover:card-shadow-xl">
           <div className="text-center mb-8">
             <div className="inline-flex items-center justify-center w-16 h-16 rounded-full bg-primary/10 mb-4">
               <svg className="w-8 h-8 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -260,6 +352,42 @@ export default function IMAPSetup() {
               For Gmail users, please use an app-specific password instead of your regular password.
             </p>
           </div>
+          </div>
+        </div>
+
+        {/* Mobile How It Works - Shown only on mobile */}
+        <div className="lg:hidden w-full max-w-md">
+          <details className="group">
+            <summary className="cursor-pointer p-4 bg-card/50 backdrop-blur rounded-lg border border-border flex items-center justify-between hover:bg-card transition-all-300">
+              <span className="font-medium flex items-center gap-2">
+                <svg className="w-5 h-5 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                </svg>
+                How it works
+              </span>
+              <svg className="w-5 h-5 text-muted-foreground transition-transform group-open:rotate-180" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
+              </svg>
+            </summary>
+            <div className="mt-2 p-4 bg-card/50 backdrop-blur rounded-lg border border-border space-y-3">
+              <div className="flex items-start gap-3">
+                <span className="font-bold text-primary">1.</span>
+                <p className="text-sm">Connect with IMAP (password never stored)</p>
+              </div>
+              <div className="flex items-start gap-3">
+                <span className="font-bold text-primary">2.</span>
+                <p className="text-sm">See all emails with attachments</p>
+              </div>
+              <div className="flex items-start gap-3">
+                <span className="font-bold text-primary">3.</span>
+                <p className="text-sm">AI suggests smart names & folders</p>
+              </div>
+              <div className="flex items-start gap-3">
+                <span className="font-bold text-primary">4.</span>
+                <p className="text-sm">Review, edit & download organized files</p>
+              </div>
+            </div>
+          </details>
         </div>
       </div>
     </div>
