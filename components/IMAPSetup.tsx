@@ -112,7 +112,7 @@ export default function IMAPSetup() {
                 <div>
                   <h3 className="font-semibold mb-1">AI Organization</h3>
                   <p className="text-sm text-muted-foreground">
-                    Click "Extract Files" and AI suggests smart names & folders based on email content.
+                    Click &quot;Extract Files&quot; and AI suggests smart names & folders based on email content.
                   </p>
                   <div className="mt-2 p-3 bg-muted rounded-lg">
                     <p className="text-xs font-mono">invoice.pdf → Invoice_12345_ABCCorp_Jan2025.pdf</p>
